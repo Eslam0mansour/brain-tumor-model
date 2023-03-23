@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Emotion Recognition</title>
+</head>
+<body>
+    <h1>Emotion Recognition</h1>
+    <form action="/classify" method="post" enctype="multipart/form-data">
+        <input type="file" name="image">
+        <input type="submit" value="Classify">
+    </form>
+</body>
+</html>
+
+The form has a file input and a submit button. When the user clicks the submit button, the image is sent to the /classify endpoint.
+
+The /classify endpoint is defined in the app.py file:
+
+@app.route('/classify', methods=['POST'])
+def classify():
+    image = request.files['image']
+    image.save('image.jpg')
+    return jsonify(classify_image('image.jpg'))
