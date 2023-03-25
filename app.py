@@ -24,7 +24,7 @@ def classify_image():
     image = tf.cast(image, tf.float32) # Convert the image to float32
     image /= 255.0 # Normalize the image to the range 0-1
     image = np.expand_dims(image, axis=0) # Add a dimension to the image
-
+    # as the model expects a batch of images
     # Run the model inference
     interpreter.set_tensor(input_details[0]['index'], image)
     interpreter.invoke()
