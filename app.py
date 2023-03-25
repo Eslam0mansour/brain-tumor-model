@@ -19,11 +19,11 @@ def classify_image():
     image_data = request.files['image'].read()
 
     # Preprocess the image
-    image = tf.io.decode_image(image_data, channels=1)
-    image = tf.image.resize(image, [48, 48])
-    image = tf.cast(image, tf.float32)
-    image /= 255.0
-    image = np.expand_dims(image, axis=0)
+    image = tf.io.decode_image(image_data, channels=1) # Convert the image to a 1D array
+    image = tf.image.resize(image, [48, 48]) # Resize the image to 48x48 pixels
+    image = tf.cast(image, tf.float32) # Convert the image to float32
+    image /= 255.0 # Normalize the image to the range 0-1
+    image = np.expand_dims(image, axis=0) # Add a dimension to the image
 
     # Run the model inference
     interpreter.set_tensor(input_details[0]['index'], image)
